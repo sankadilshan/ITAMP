@@ -14,9 +14,9 @@ public class User {
 	@NotBlank
 	private String username;
 	@NotBlank
-	private String firstName;
+	private String firstname;
 	@NotBlank
-	private String lastName;
+	private String lastname;
 	@NotBlank
 	private String password;
 
@@ -24,8 +24,8 @@ public class User {
 	public User( String username, String firstName, String lastName, String password) {
 		super();
 		this.username = username;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.firstname = firstName;
+		this.lastname = lastName;
 		this.password = password;
 	}
 
@@ -48,16 +48,16 @@ public class User {
 
 
 	public String getFirstName() {
-		return firstName;
+		return firstname;
 	}
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstname = firstName;
 	}
 	public String getLastName() {
-		return lastName;
+		return lastname;
 	}
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastname = lastName;
 	}
 	public String getPassword() {
 		return password;
@@ -69,7 +69,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
+		return "User [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
 				+ ", password=" + password + "]";
 	}
    

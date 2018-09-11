@@ -1,5 +1,7 @@
 package com.itamp.ServiceImpl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,9 @@ public class ServiceImpl implements com.itamp.Service.Service {
 	Repository repository;
 
 	@Override
-	public void user(User user) {
+	public User user(User user) {
 		// TODO Auto-generated method stub
-		repository.save(user);
+		return repository.save(user);
 		
 	}
 	@Override
@@ -29,6 +31,11 @@ public class ServiceImpl implements com.itamp.Service.Service {
 			return user;
 		}
 		return null;
+	}
+	@Override
+	public List findAll() {
+		// TODO Auto-generated method stub
+		return repository.findAll();
 	}	
 
 }

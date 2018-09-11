@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
-Built-By: Hashan
-Build-Jdk: 10.0.1
 Implementation-Title: ITAMP
 Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: sanka
 Implementation-Vendor-Id: com.itamp
-Implementation-Vendor: Pivotal Software, Inc.
+Build-Jdk: 1.8.0_162
 Implementation-URL: http://projects.spring.io/spring-boot/ITAMP/
 Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
 

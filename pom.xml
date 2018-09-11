@@ -17,6 +17,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+    
 
     <!-- JSTL tag lib -->
     <dependency>
@@ -80,6 +81,24 @@
 
   <build>
     <plugins>
+    <plugin>
+<artifactId>maven-resources-plugin</artifactId>
+<executions>
+      <execution>
+          <id>copy-resources</id>
+          <phase>validate</phase>
+          <goals><goal>copy-resources</goal></goals>
+          <configuration>
+              <outputDirectory>D:/pr/parent/ITAMP/src/main/resources/static/</outputDirectory >
+              <resources>
+                  <resource>
+                      <directory>D:/pr/parent/Spring-client/dist/Spring-client</directory >
+                  </resource>
+              </resources>
+          </configuration>
+      </execution>
+</executions>
+</plugin>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
