@@ -2,42 +2,47 @@ package com.itamp.Model;
 
 import javax.persistence.*;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="user")
 public class User {
 	
+    @Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
-	@Id
-	@NotBlank
-	private String username;
-	@NotBlank
-	private String firstname;
-	@NotBlank
-	private String lastname;
-	@NotBlank
-	private String password;
-
+	@Column(name="id")
+	private long id ;
 	
-	public User( String username, String firstName, String lastName, String password) {
+	@Column(name="username", unique=true)
+	private String username;
+	
+	@Column(name="firstname")
+	private String firstname;
+	
+	@Column(name="lastname")
+	private String lastname;
+	
+	@Column(name="password")
+	private String password;
+	
+	public User() {}
+
+	public User( String username, String firstname, String lastname, String password) {
 		super();
+	
 		this.username = username;
-		this.firstname = firstName;
-		this.lastname = lastName;
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.password = password;
 	}
-
 
 	public long getId() {
 		return id;
 	}
-	
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public String getUsername() {
 		return username;
 	}
@@ -46,31 +51,31 @@ public class User {
 		this.username = username;
 	}
 
-
-	public String getFirstName() {
+	public String getFirstname() {
 		return firstname;
 	}
-	public void setFirstName(String firstName) {
-		this.firstname = firstName;
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
-	public String getLastName() {
+
+	public String getLastname() {
 		return lastname;
 	}
-	public void setLastName(String lastName) {
-		this.lastname = lastName;
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	
+	
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", password=" + password + "]";
-	}
-   
 }

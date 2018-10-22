@@ -1,6 +1,10 @@
+com\itamp\Model\Mother.class
 com\itamp\ServiceImpl\ServiceImpl.class
+com\itamp\Model\Child.class
 com\itamp\Controller\UserController.class
+com\itamp\Controller\ChildController.class
 com\itamp\Model\User.class
-com\itamp\Repository\Repository.class
+com\itamp\Repository\UserRepository.class
 com\itamp\Application.class
+com\itamp\Repository\ChildRepository.class
 com\itamp\Service\Service.class
