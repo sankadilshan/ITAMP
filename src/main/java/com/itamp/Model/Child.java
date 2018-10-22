@@ -35,10 +35,10 @@ public class Child {
    @JoinColumn(name="childId", referencedColumnName="motherId")
    private Mother mother;
    
-   @ManyToOne(cascade=CascadeType.ALL)
-   @JoinColumn(name="childId", referencedColumnName="guardianId", insertable=false, updatable=true)
+  /* @ManyToOne(cascade=CascadeType.ALL)
+   @JoinColumn(name="childId", referencedColumnName="guardianId")
    private Guardian guardian;
-	
+	*/
     public Child(){}
 
 	
@@ -175,7 +175,7 @@ public class Child {
 		this.mother = mother;
 	}
 
-
+/*
 
 	public Guardian getGuardian() {
 		return guardian;
@@ -187,6 +187,6 @@ public class Child {
 		this.guardian = guardian;
 	}
 
-	 
+	 */
 	
 }
