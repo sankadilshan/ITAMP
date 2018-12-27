@@ -19,7 +19,7 @@ public class ServiceImpl implements com.itamp.Service.Service {
 	@Autowired
 	private ChildRepository childRepository;
 
-	//for user model
+	//for user model..................................
 	@Override
 	public String add(User user) {
 		userRepository.save(user);
@@ -63,6 +63,14 @@ public class ServiceImpl implements com.itamp.Service.Service {
 		return null;
 	}
    */
+	@Override
+	public User username(String username) {
+		User user=userRepository.findByUsername(username);
+		if(user != null) {
+		return user;
+		}
+		else return null;
+	}
 	
 	@Override
 	public User delete(User user) {
@@ -70,7 +78,7 @@ public class ServiceImpl implements com.itamp.Service.Service {
 	    return user;
 	}
      
-	//for child model
+	//for child model................................................
 	@Override
 	public String addChild(Child child) {
 	     childRepository.saveAndFlush(child);
@@ -82,15 +90,37 @@ public class ServiceImpl implements com.itamp.Service.Service {
 	 List<Child> child=childRepository.findAll();
 		return child;
 	}
+	
 	@Override
-	public User username(String username) {
-		User user=userRepository.findByUsername(username);
-		if(user != null) {
-		return user;
-		}
-		else return null;
+	public Child regId(String regiId) {
+	      Child child=childRepository.findByRegistrationId(regiId);
+	      if(child!=null)
+	    	  return  child;
+	      else
+	    	  return null;
+	}
+	@Override
+	public Child upchild(Long childId) {
+		return childRepository.findOne(childId);
+	}
+	@Override
+	public void updateCh(Child ch) {
+		childRepository.save(ch);
+	}
+	@Override
+	public void dleteChild(Child dchild) {
+		childRepository.deleteByChildId(dchild.getChildId());
+		
 	}
 	
+	@Override
+	public Child getchild(String registrationId) {
+		Child newchild=childRepository.findByRegistrationId(registrationId);
+		  if(newchild.getRegistrationId()==registrationId)
+			  return newchild;
+		  else
+		  return null;
+	}
 	
 	
 	

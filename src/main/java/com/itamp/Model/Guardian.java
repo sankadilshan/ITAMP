@@ -1,6 +1,9 @@
 package com.itamp.Model;
 
+import java.util.List;
+
 import javax.persistence.*;
+
 
 @Entity
 @Table(name="guardian")
@@ -14,8 +17,11 @@ public class Guardian {
     private String telephone;
     private String address;
     
+
+   @OneToMany( mappedBy="guardian",cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    private List<Child> child;
     
-    
+   
 	public Guardian() {	}
 
 
@@ -77,6 +83,18 @@ public class Guardian {
 		this.guardianId = guardianId;
 	}
 
+
+/*	public List<Child> getChild() {
+		return child;
+	}
+
+
+	public void setChild(List<Child> child) {
+		this.child = child;
+	}
+
+
+	*/
 
 	
 

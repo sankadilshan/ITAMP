@@ -37,7 +37,7 @@ public class UserController {
 	public String username(@RequestParam String username) {
 		User user= service.username(username);
 		if(user!=null) {
-			return user.getFirstname()+" "+user.getLastname();
+			return user.getFirstname()+" "+user.getLastName();
 		}
 		else return "error";
 	}

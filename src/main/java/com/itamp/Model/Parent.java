@@ -1,147 +1,179 @@
 package com.itamp.Model;
 
+import javax.annotation.Resources;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.boot.model.relational.Exportable;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+
 @Entity
-@Table(name="mother")
-public class Mother {
+@Table(name="parent")
+public class Parent {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="motherId", nullable=false)
-	private Long motherId;
-	
+	@Column(name="parentId", nullable=false)
+	private Long parentId;	
 	@Column(name="nic" ,nullable=false)
-	private  String nic;
-	@Column(name="name", nullable=false)
-	private String name;
+	private  String nic; //its be mother's nic
+	@Column(name=" mothermaidenname", nullable=false)
+	private String motherMaidenName;
 	@Column(name="registrationNo", nullable=false)
 	private String registrationNo;
-	@Column(name="wardNo",nullable=false)
-	private String wardNo;
-	@Column(name="bhtNo")
-	private String bhtNo;
-	//BHTNO
-	@Column(name="delivaryDetails")
-	private String delivaryDetails;
-	@Column(name="delivaryStatus", nullable=false)
-	private String delivaryStatus;
-	@Column(name="infontStatus")
-	private String infontStatus;
+	@Column(name="fathername")
+	private String fatherName;
+	@Column(name="fathernic")
+	private String fatherNic;
+	@Column(name="contactno")
+	private String contactNo;
+	@Column(name="multiplebirth")
+	private Boolean multipleBirth;
+	@Column(name="crs")
+	private Boolean CRS; // congential rubbella syndrome;
+	@Column(name="nnt")
+	private Boolean NNT;   // neonatal tetanus
 	
-   /* @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="motherId", referencedColumnName="childId")
-    private Child child; */
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="infoId",referencedColumnName="infoId")
+	private AdditionalInfo additional;
 	
-	public Mother() {}
+	public Parent() {};
 	
-	public Mother(Long motherId,String nic, String name, String registrationNo, String wardNo, String bhtNo, String delivaryDetails,
-			String delivaryStatus, String infontStatus) {
+	public Parent(Long parentId, String nic, String motherMaidenName, String registrationNo, String fatherName,
+			String fatherNic, String contactNo, Boolean multipleBirth, Boolean cRS, Boolean nNT,
+			AdditionalInfo addinfo) {
 		super();
-		this. motherId= motherId;
+		this.parentId = parentId;
 		this.nic = nic;
-		this.name = name;
+		this.motherMaidenName = motherMaidenName;
 		this.registrationNo = registrationNo;
-		this.wardNo = wardNo;
-		this.bhtNo = bhtNo;
-		this.delivaryDetails = delivaryDetails;
-		this.delivaryStatus = delivaryStatus;
-		this.infontStatus = infontStatus;
-		
+		this.fatherName = fatherName;
+		this.fatherNic = fatherNic;
+		this.contactNo = contactNo;
+		this.multipleBirth = multipleBirth;
+		this.CRS = cRS;
+		this.NNT = nNT;
+		this.additional = addinfo;
 	}
+    
 
-	public Long getMotherId() {
-		return motherId;
+
+
+	public Long getParentId() {
+		return parentId;
+	}	
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
-
-	public void setMotherId(Long motherId) {
-		this.motherId = motherId;
-	}
-
 	public String getNic() {
 		return nic;
 	}
-
 	public void setNic(String nic) {
 		this.nic = nic;
 	}
-
-	public String getName() {
-		return name;
+	public String getMotherMaidenName() {
+		return motherMaidenName;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setMotherMaidenName(String motherMaidenName) {
+		this.motherMaidenName = motherMaidenName;
 	}
-
 	public String getRegistrationNo() {
 		return registrationNo;
 	}
-
 	public void setRegistrationNo(String registrationNo) {
 		this.registrationNo = registrationNo;
 	}
-
-	public String getWardNo() {
-		return wardNo;
+	public String getFatherName() {
+		return fatherName;
 	}
-
-	public void setWardNo(String wardNo) {
-		this.wardNo = wardNo;
-	}
-
-	public String getBhtNo() {
-		return bhtNo;
-	}
-
-	public void setBhtNo(String bhtNo) {
-		this.bhtNo = bhtNo;
-	}
-
-	public String getDelivaryDetails() {
-		return delivaryDetails;
-	}
-
-	public void setDelivaryDetails(String delivaryDetails) {
-		this.delivaryDetails = delivaryDetails;
-	}
-
-	public String getDelivaryStatus() {
-		return delivaryStatus;
-	}
-
-	public void setDelivaryStatus(String delivaryStatus) {
-		this.delivaryStatus = delivaryStatus;
-	}
-
-	public String getInfontStatus() {
-		return infontStatus;
-	}
-
-	public void setInfontStatus(String infontStatus) {
-		this.infontStatus = infontStatus;
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
 	}
 	
-/*	
-	public Child getChild() {
-		return child;
+	public String getFatherNic() {
+		return fatherNic;
+	}
+	
+	
+	public void setFatherNic(String fatherNic) {
+		this.fatherNic = fatherNic;
+	}
+	
+	
+	public String getContactNo() {
+		return contactNo;
+	}
+	
+	
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
+	}
+	
+	public Boolean getMultipleBirth() {
+		return multipleBirth;
 	}
 
-	public void setChild(Child child) {
-		this.child = child;
+
+	public void setMultipleBirth(Boolean multipleBirth) {
+		this.multipleBirth = multipleBirth;
 	}
-*/
+
+
+	public Boolean getCRS() {
+		return CRS;
+	}
+
+
+	public void setCRS(Boolean cRS) {
+		CRS = cRS;
+	}
+
+
+	public Boolean getNNT() {
+		return NNT;
+	}
+
+
+	public void setNNT(Boolean nNT) {
+		NNT = nNT;
+	}
+
+
+	public AdditionalInfo getAddinfo() {
+		return additional;
+	}
+
+
+	public void setAddinfo(AdditionalInfo addinfo) {
+		this.additional = addinfo;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Mother [motherId=" + motherId + ", nic=" + nic + ", name=" + name + ", registrationNo=" + registrationNo
-				+ ", wardNo=" + wardNo + ", bhtNo=" + bhtNo + ", delivaryDetails=" + delivaryDetails
-				+ ", delivaryStatus=" + delivaryStatus + ", infontStatus=" + infontStatus + "]";
+		return "Parent [parentId=" + parentId + ", nic=" + nic + ", motherMaidenName=" + motherMaidenName
+				+ ", registrationNo=" + registrationNo + ", fatherName=" + fatherName + ", fatherNic=" + fatherNic
+				+ ", contactNo=" + contactNo + ", multipleBirth=" + multipleBirth + ", CRS=" + CRS + ", NNT=" + NNT
+				+ ", additional=" + additional + "]";
 	}
+
+
 	
-	
+		
+		
+    	
+		
 
 }

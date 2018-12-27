@@ -5,6 +5,8 @@ import java.sql.Time;
 
 import javax.persistence.*;
 
+
+
 @Entity
 @Table(name="child")
 public class Child {
@@ -31,17 +33,30 @@ public class Child {
     @Column(name="placeOfBirth")
 	private String placeOfBirth;
     
-   @OneToOne(cascade=CascadeType.ALL)
-   @JoinColumn(name="childId", referencedColumnName="motherId")
-   private Mother mother;
    
-  /* @ManyToOne(cascade=CascadeType.ALL)
-   @JoinColumn(name="childId", referencedColumnName="guardianId")
+   @OneToOne(cascade=CascadeType.ALL , fetch=FetchType.EAGER)
+   @JoinColumn(name="parentId" ,referencedColumnName="parentId", updatable=true)
+   private Parent parent;
+   
+   @OneToOne(cascade=CascadeType.ALL , fetch=FetchType.EAGER)
+   @JoinColumn(name="areaId", referencedColumnName="areaId", updatable=true)
+   private Area area;
+   
+   @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER )
+   @JoinColumn(name="hospitalId" , referencedColumnName="hospitalId" , updatable=true)
+   private Hospital hospital;
+   
+   @OneToOne(cascade=CascadeType.ALL , fetch=FetchType.EAGER)
+   @JoinColumn(name="addressId", referencedColumnName="addressId" ,updatable=true)
+   private CurrentAddress currentAddress;
+ 
+   @ManyToOne
+   @JoinColumn(name="guardianId")
    private Guardian guardian;
-	*/
-    public Child(){}
-
+   
+  
 	
+    public Child(){}
 
 	public Child(String registrationId,Date registrationDate, String fullName, String hin, Date dateOfBirth,
 			Time timeOfBirth, String gender, Float birthWeight, String placeOfBirth) {
@@ -55,6 +70,7 @@ public class Child {
 		this.gender = gender;
 		this.birthWeight = birthWeight;
 		this.placeOfBirth = placeOfBirth;
+		
 	}
 
 
@@ -67,8 +83,6 @@ public class Child {
 		this.registrationId = registrationId;
 	}
 
-
-
 	public String getFullName() {
 		return fullName;
 	}
@@ -77,44 +91,29 @@ public class Child {
 		this.fullName = fullName;
 	}
 
-	
-
 	public Date getRegistrationDate() {
 		return registrationDate;
 	}
-
-
 
 	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
-
-
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
-
-
 
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-
-
 	public Time getTimeOfBirth() {
 		return timeOfBirth;
 	}
 
-
-
 	public void setTimeOfBirth(Time timeOfBirth) {
 		this.timeOfBirth = timeOfBirth;
 	}
-
-
-
 	public String getGender() {
 		return gender;
 	}
@@ -139,54 +138,63 @@ public class Child {
 		this.placeOfBirth = placeOfBirth;
 	}
 
-
-
 	public String getHin() {
 		return hin;
 	}
-
-
 
 	public void setHin(String hin) {
 		this.hin = hin;
 	}
 
-
-
 	public Long getChildId() {
 		return childId;
 	}
-
-
 
 	public void setChildId(Long childId) {
 		this.childId = childId;
 	}
 
-
-
-	public Mother getMother() {
-		return mother;
-	}
-
-
-
-	public void setMother(Mother mother) {
-		this.mother = mother;
-	}
-
-/*
-
 	public Guardian getGuardian() {
 		return guardian;
 	}
-
-
 
 	public void setGuardian(Guardian guardian) {
 		this.guardian = guardian;
 	}
 
-	 */
+	public Parent getParent() {
+		return parent;
+	}
+
+	public void setParent(Parent parent) {
+		this.parent = parent;
+	}
+
+	public Area getArea() {
+		return area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
+	}
+
+	public Hospital getHospital() {
+		return hospital;
+	}
+
+	public void setHospital(Hospital hospital) {
+		this.hospital = hospital;
+	}
+
+	public CurrentAddress getCurrentAddress() {
+		return currentAddress;
+	}
+
+	public void setCurrentAddress(CurrentAddress currentAddress) {
+		this.currentAddress = currentAddress;
+	}
+
+    
+	
 	
 }

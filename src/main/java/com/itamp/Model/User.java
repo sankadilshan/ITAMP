@@ -3,6 +3,8 @@ package com.itamp.Model;
 import javax.persistence.*;
 
 
+
+
 @Entity
 @Table(name="user")
 public class User {
@@ -11,28 +13,36 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
 	private long id ;
-	
 	@Column(name="username", unique=true)
 	private String username;
-	
-	@Column(name="firstname")
+	@Column(name="firstName")
 	private String firstname;
-	
 	@Column(name="lastname")
-	private String lastname;
-	
+	private String lastName;
 	@Column(name="password")
 	private String password;
+	@Column(name="contactno")
+	private String contactNo;
+	@Column(name="email")
+	private String email;
+	
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="roleId" , referencedColumnName="roleId")
+	private Role role;
 	
 	public User() {}
-
-	public User( String username, String firstname, String lastname, String password) {
-		super();
 	
+	public User(long id, String username, String firstname, String lastName, String password, String contactNo,
+			String email) {
+		super();
+		this.id = id;
 		this.username = username;
 		this.firstname = firstname;
-		this.lastname = lastname;
+		this.lastName = lastName;
 		this.password = password;
+		this.contactNo = contactNo;
+		this.email = email;
+	
 	}
 
 	public long getId() {
@@ -59,12 +69,12 @@ public class User {
 		this.firstname = firstname;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getPassword() {
@@ -75,7 +85,29 @@ public class User {
 		this.password = password;
 	}
 
-	
-	
+	public String getContactNo() {
+		return contactNo;
+	}
 
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	
 }

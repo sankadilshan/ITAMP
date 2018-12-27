@@ -18,6 +18,12 @@ public interface Service {
 	String addChild(Child child);
 	List<Child> findAllChild();
 	User username(String username);
+	Child regId(String regiId);
+     Child upchild(Long childId);
+	void updateCh(Child ch);
+	void dleteChild(Child dchild);
+	Child getchild(String registrationId);
+	
 	
 	
 }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itamp.Model.Guardian;
 import com.itamp.Repository.GuardianRepository;
 
-@CrossOrigin(origins = "http://localhost:4200" ,maxAge= 3600)
+//@CrossOrigin(origins = "http://localhost:4200" ,maxAge= 3600)
 @RestController
 @RequestMapping("/api")
 public class GuardianController {
@@ -24,7 +24,7 @@ public class GuardianController {
 	public Guardian add(@RequestBody Guardian guardian) {
 		      return  guardianRepository.save(guardian);
 	}
-	@GetMapping
+	@GetMapping("/guardian")
 	public List<Guardian> guardians(){
 		return  guardianRepository.findAll();
 	}
