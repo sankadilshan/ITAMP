@@ -3,91 +3,52 @@ package com.itamp.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itamp.Model.Child;
-import com.itamp.Service.Service;
+import com.itamp.Service.ChildService;
 
-@CrossOrigin(origins = "http://localhost:4200" ,maxAge= 3600)
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/child")
 public class ChildController {
 	
 	@Autowired
-	private Service service;
-	
-	@GetMapping("/getc")
-	public String work() {
-		return "work";
-	}
+	private ChildService childService;
 	
 	//add one child
-	@PostMapping(value="/childadd" , consumes = "application/Json")
-    public String childAdd(@RequestBody Child child) {
-    	return service.addChild(child); 	   
+	@PostMapping( consumes = "application/Json")
+    public String add(@RequestBody Child child) {
+    	return childService.add(child); 	   
     }
-	//get child posting registrationid
-	@PostMapping(value="/registrationid")
-	public Child getChild(@RequestBody Child child) {
-		
-		return service.getchild(child.getRegistrationId());
-	}
 	
 	//get all child
-    @GetMapping("/allchild")
-    public List<Child> findAll() {
-    return service.findAllChild();
+    @GetMapping()
+    public List<Child> all() {
+    return childService.all();
     }
     
     //get child by registrationid
-	@GetMapping(value="/register")
-	public Child regiId(@RequestParam String registrationId) {
-		System.out.println("register id******** :"+registrationId);
-	  Child child=service.regId(registrationId);
-	  if(child !=null)
-		  return child;
-	  else
-		  return null;
+	@GetMapping("/{id}")
+	public Child get(@PathVariable String id) {
+	  Child child=childService.get(id);
+	 return child;
 	}
 	//update child
-	@PutMapping(value="/childupdate", consumes="application/json")
-	public void updateChild(@RequestBody Child newchild) {
-		 if(service.upchild(newchild.getChildId())!=null) {
-			 Child ch=new Child();
-			 ch.setChildId(newchild.getChildId());
-			 ch.setRegistrationId(newchild.getRegistrationId());
-			 ch.setRegistrationDate(newchild.getRegistrationDate());
-			 ch.setFullName(newchild.getFullName());
-			 ch.setHin(newchild.getHin());
-			 ch.setDateOfBirth(newchild.getDateOfBirth());
-			 ch.setTimeOfBirth(newchild.getTimeOfBirth());
-			 ch.setGender(newchild.getGender());
-			 ch.setBirthWeight(newchild.getBirthWeight());
-			 ch.setPlaceOfBirth(newchild.getPlaceOfBirth());
-			 ch.setGuardian(newchild.getGuardian());
-			 
-			 service.updateCh(ch);
+	@PutMapping( consumes="application/json")
+	public void update(@RequestBody Child child) {
+		 childService.update(child);
 		 }
-	}
-		 @DeleteMapping("/deletechild")
-		 public String deletechild(@RequestParam(required=true, name="registrationId") String registrationId) {
-			 Child dchild=service.regId(registrationId);
-			 if(dchild!=null) {
-				 service.dleteChild(dchild);
-				 return "deleted successfully";
-			 }
-		     
-			 else {
-				 return "not found child";
-			 }
-	}
 	
+		 @DeleteMapping("/{id}")
+		 public String delete(@PathVariable String registrationId) {
+		     childService.delete(registrationId);
+	        return null;      
+    }
 }

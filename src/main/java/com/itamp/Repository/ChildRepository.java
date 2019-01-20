@@ -7,6 +7,6 @@ public interface ChildRepository extends JpaRepository<Child, Long> {
 
 	Child findByRegistrationId(String regiId);
 
-	void deleteByChildId(Long childId);
+	void deleteByChildId(String id);
 
 }

@@ -22,7 +22,7 @@ import com.itamp.Repository.PHMRepository;
 import com.itamp.Repository.RDHSRepository;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/location")
 @CrossOrigin(origins = "http://localhost:4200" ,maxAge= 3600)
 public class LocationController {
 

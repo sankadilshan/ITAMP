@@ -2,69 +2,60 @@ package com.itamp.Controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itamp.Model.User;
-import com.itamp.Service.Service;
+import com.itamp.Service.UserService;
+import com.itamp.ServiceImpl.ExceptionHandler;
+
 import java.security.Principal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-@CrossOrigin(origins = "http://localhost:4200" ,maxAge= 3600)
-@RequestMapping("/api")
+@RequestMapping("/user")
 @RestController
 public class UserController {
 	public static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
-    private Service service;
+    private UserService userService;
 	
-	@GetMapping(value="/get")
-	public String we() {
-		return "work";
-	}
 	//using username
-	@GetMapping(value="/username")
-	public String username(@RequestParam String username) {
-		User user= service.username(username);
-		if(user!=null) {
-			return user.getFirstname()+" "+user.getLastName();
-		}
-		else return "error";
+	@GetMapping("/{username}")
+	public String get(@PathVariable String username) {
+		 return  userService.get(username);
+		
 	}
 	
 	//add one user
-	@PostMapping(value="/useradd" , consumes = "application/json")
-    public String use(@RequestBody User user) {
-    	return service.add(user); 	   
+	@PostMapping( consumes = "application/json")
+    public void add(@RequestBody User user) {
+    	 userService.add(user); 	   
     }
 	
 	//get all users
-    @GetMapping("/all")
-    public List<User> findAll() {
-    return service.findAll();
+    @GetMapping()
+    public List<User> all() {
+    return userService.all();
     }
     
     //get user using id
     @GetMapping("/{id}")
-    public User oneUser(@PathVariable long id) {
-     return	service.find(id);
+    public User userid(@PathVariable Long id) {
+     return	userService.find(id);
     	
     }
     
     //login
-    @PostMapping(value="/login")
-    public User login( @RequestBody User user1) {
-    	return service.login(user1.getUsername(),user1.getPassword());
+    @PostMapping("/login")
+    public User login( @PathVariable User user) {
+    	return userService.login(user.getUsername(),user.getPassword());
     	
     }
     
@@ -75,9 +66,9 @@ public class UserController {
     }*/
     
     //delete user
-    @DeleteMapping("/delete")
-    	public User deleteUser(@RequestBody User user) {
-    		return service.delete(user);
+    @DeleteMapping("/{id}")
+    	public void delete(@PathVariable Long id) {
+    		userService.delete(id);
     }
     
     

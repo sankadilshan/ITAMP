@@ -47,13 +47,13 @@ public class Parent {
 	
     @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="infoId",referencedColumnName="infoId")
-	private AdditionalInfo additional;
+	private MotherAdditionalInformation additional;
 	
 	public Parent() {};
 	
 	public Parent(Long parentId, String nic, String motherMaidenName, String registrationNo, String fatherName,
 			String fatherNic, String contactNo, Boolean multipleBirth, Boolean cRS, Boolean nNT,
-			AdditionalInfo addinfo) {
+			MotherAdditionalInformation addinfo) {
 		super();
 		this.parentId = parentId;
 		this.nic = nic;
@@ -151,12 +151,12 @@ public class Parent {
 	}
 
 
-	public AdditionalInfo getAddinfo() {
+	public MotherAdditionalInformation getAddinfo() {
 		return additional;
 	}
 
 
-	public void setAddinfo(AdditionalInfo addinfo) {
+	public void setAddinfo(MotherAdditionalInformation addinfo) {
 		this.additional = addinfo;
 	}
 
